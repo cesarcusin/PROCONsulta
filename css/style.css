@@ -56,7 +56,7 @@ body {backgroud-color:#F9F9F9;font:.8em/1.2em 'Open Sans';color:#333}
 ---------------------------------------------------------------------------------------------------- */
 #logo {margin:25px 0}
 #logo a.logo {color:#FF9911;font-family:"DroidSans";font-size:2.4em;font-weight:bold;text-decoration:none}
-#logo a.logo span.undln {border-bottom:2px solid #5D5D5D}
+#logo a.logo span.undln {border-bottom:4px solid #5D5D5D}
 #logo a.logo span.sulta {color:#5D5D5D;font-size:1.3em;font-weight:normal}
 
 /* Tags
