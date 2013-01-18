@@ -1,0 +1,85 @@
+/* 
+    Document   : estilo
+    Created on : 11/01/2013, 20:59:05
+    Author     : Jonas Esteves
+    Description: Estilo da página inicial.
+        Purpose of the stylesheet follows.
+
+
+        Procom = #FF9911
+        Sulta  = #7A7A7A
+*/
+
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.padding10 {
+    padding: 10px;
+}
+
+body {
+    background: #eee url('../img/bg.jpg') repeat;
+    font-family: 'Rambla', sans-serif;
+    text-align: center;
+}
+
+
+img {
+    max-width: 100%;
+}
+
+nav {
+    background: #eee url('../img/bg.jpg') repeat;
+}
+
+nav a, ul{
+    ddisplay: inline-block;
+    vertical-align: middle;
+}
+
+nav li{
+    display: inline-block;
+    padding: 6px;
+}
+
+footer{
+    background: #7a7a7a;
+    border-radius: 4px;
+    color: white;
+    font-family: arial;
+    font-size: 12px;
+    margin: 0 auto;
+    margin-top: 20px;
+    max-width: 90%; /*caixa header vai ocupar 90% da tela*/
+    padding: 0.75em 0;
+    text-align: center;
+}
+
+a {
+    color: #ff9911;
+    text-decoration: none;
+}
+
+#map_canvas {
+    display: inline-block;
+    height: 200px;
+    margin-top: 30px;
+    text-align: center;
+    width: 500px;
+    max-width: 85%;
+}
+
+.tabela {
+    border: 0.1em solid #7a7a7a;
+    border-radius: 4px;
+    display: inline-block;
+    text-align: center;
+}
+
+.td{
+    border: 0.1em solid #7a7a7a;
+    border-radius: 4px;
+}

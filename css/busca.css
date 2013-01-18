@@ -1,0 +1,41 @@
+/* 
+    Document   : busca
+    Created on : 12/01/2013, 15:19:34
+    Author     : Jonas
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#busca-html5 {
+    background: #FAFAFA;
+    border: none;
+    border: 1px solid #BFBFBF !important;
+    color: #2f2f2f;
+    display: inline;
+    ffloat: left;
+    font: normal 100% Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    height: 20px;
+    margin: 0 0 0 0;
+    max-width: 100%;
+    ooutline: none;
+    padding: 3px 3px;
+    width: 200px;
+}
+
+input#buscar-busca-html5 {
+    background: #58A9E8 url(https://lh4.googleusercontent.com/-QE1imp0WR7E/ToaJ-T4s_tI/AAAAAAAACJM/OIwx673LHVc/h80/buscar.png) 3px 2px no-repeat;
+    border: 1px solid #4189C1 !important;
+    display: inline;
+    color: white;
+    cursor: pointer;
+    height: 32px;
+    margin: 0 0 0 0;
+    mmargin-left: 8px !important;
+    text-indent: -9999px;
+    width: 35px;
+}
+
+input#buscar-busca-html5:active {
+    background: #71b8ef url(https://lh4.googleusercontent.com/-QE1imp0WR7E/ToaJ-T4s_tI/AAAAAAAACJM/OIwx673LHVc/h80/buscar.png) 3px 2px no-repeat;
+}
