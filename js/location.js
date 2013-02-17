@@ -3,7 +3,7 @@
             // Locate position
             navigator.geolocation.getCurrentPosition(displayPosition, errorFunction);
         } else {
-            alert('It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it.');
+            alert('Aparentemente a Geolocalização não está habilitada em seu navegador. Por favor, utilize um navegador que suporte.');
         }
 
 // Success callback function
@@ -28,7 +28,7 @@
             var marker = new google.maps.Marker({
                 position: latlng,
                 map: map,
-                title: "You are here"
+                title: "Você está aqui."
             });
         }
 
