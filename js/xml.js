@@ -7,6 +7,7 @@ function postCallXML(endereco,dados,funcao) {
         xmlhttp = new XMLHttpRequest();
     else
 		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	console.log("withCredentials" in xmlhttp);
 	xmlhttp.onreadystatechange=function() {
 		if(xmlhttp.readyState==4 && xmlhttp.status==200)
 			funcao(xmlhttp.responseXML);
