@@ -41,6 +41,23 @@ function mostraSugestao() {
 	});
 }
 
+function pesquisar(termo,pagina) {
+	var termoPesquisa = encodeURIComponent(termo);
+	postCallXML('http://projetos.arturluiz.com/proconsulta/resultado.php','termo='+termoPesquisa+'&pagina='+pagina,function (xmlDoc) {
+		var container = document.createElement('div');
+		container.id = 'sugestoes';
+		var content = ""; 
+		var x = xmlDoc.getElementsByTagName("texto");
+		var y = xmlDoc.getElementsByTagName("termo");
+		console.log("Pesquisa pelo termo: "+y[0].childNodes[0].nodeValue+"\n");
+		for (i = 0; i < x.length; i++)
+			content += '<span onclick="clicaSugestao(this)">'+x[i].childNodes[0].nodeValue+'</span><br/>';
+		container.innerHTML = content; 
+        document.getElementById('form-busca').appendChild(container);
+		timeTemp++;
+	});
+}
+
 var inputPesqusia = document.getElementById('busca-html5');
 if(typeof inputPesqusia != "undefined") {
 	inputPesqusia.onkeyup = function() {
@@ -54,4 +71,13 @@ function clicaSugestao(dom) {
 	var x = document.getElementById('sugestoes');
 	x.parentNode.removeChild(x);
 	document.getElementById('form-busca').onsubmit();
+}
+
+var formBusca = document.getElementById('form-busca');
+if(typeof formBusca != "undefined") {
+	formBusca.onsubmit = function() {
+		var termo = document.getElementById('busca-html5').value;
+		var pagina = 1;
+		pesquisar(termo,pagina);
+	}
 }
