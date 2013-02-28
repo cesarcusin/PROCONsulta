@@ -79,5 +79,6 @@ if(typeof formBusca != "undefined") {
 		var termo = document.getElementById('busca-html5').value;
 		var pagina = 1;
 		pesquisar(termo,pagina);
+		return false;
 	}
 }
