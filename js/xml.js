@@ -1,7 +1,7 @@
-// Vari·veis de tempo
+// Vari√°veis de tempo
 var timeHolder, timeTemp = 0;
 
-// FunÁ„o que ir· chamar os XML, recebe o endereÁo, os dados e a funÁ„o que ir· executar ao final
+// Fun√ß√£o que ir√° chamar os XML, recebe o endere√ßo, os dados e a fun√ß√£o que ir√° executar ao final
 function postCallXML(endereco,dados,funcao) {
     var xhr = new XMLHttpRequest();
 	if ("withCredentials" in xhr) {
@@ -18,7 +18,7 @@ function postCallXML(endereco,dados,funcao) {
 	xhr.send(dados);
 }
 
-// Funcao que ir· exibir a lista de sugestıes de pesquisa
+// Funcao que ir√° exibir a lista de sugest√µes de pesquisa
 function mostraSugestao() {
 	var termoPesquisa = encodeURIComponent(document.getElementById('busca-html5').value);
 	clearInterval(timeHolder);
@@ -32,7 +32,7 @@ function mostraSugestao() {
 		var content = ""; 
 		var x = xmlDoc.getElementsByTagName("texto");
 		var y = xmlDoc.getElementsByTagName("termo");
-		console.log("Sugestıes para o termo: "+y[0].childNodes[0].nodeValue);
+		console.log("Sugest√µes para o termo: "+y[0].childNodes[0].nodeValue);
 		for (i = 0; i < x.length; i++)
 			content += '<span onclick="clicaSugestao(this)">'+x[i].childNodes[0].nodeValue+'</span><br/>';
 		container.innerHTML = content; 
@@ -47,6 +47,9 @@ function pesquisar(termo,pagina) {
 		var container = document.createElement('div');
 		container.id = 'resultado';
 		var content = "<h4>Resultados</h4>"; 
+		if(pagina>1) {
+			content += "<a href=\"#\" title=\"Voltar p√°gina\">Voltar</a>";
+		}
 		var x = xmlDoc.getElementsByTagName("texto");
 		var y = xmlDoc.getElementsByTagName("termo");
 		console.log("Pesquisa pelo termo: "+y[0].childNodes[0].nodeValue);
