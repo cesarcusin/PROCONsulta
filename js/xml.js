@@ -46,7 +46,7 @@ function pesquisar(termo,pagina) {
 	postCallXML('http://projetos.arturluiz.com/proconsulta/resultado.php','termo='+termoPesquisa+'&pagina='+pagina,function (xmlDoc) {
 		var container = document.createElement('div');
 		container.id = 'resultado';
-		var content = ""; 
+		var content = "<h4>Resultados</h4>"; 
 		var x = xmlDoc.getElementsByTagName("texto");
 		var y = xmlDoc.getElementsByTagName("termo");
 		console.log("Pesquisa pelo termo: "+y[0].childNodes[0].nodeValue);
