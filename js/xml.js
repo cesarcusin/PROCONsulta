@@ -3,18 +3,19 @@ var timeHolder, timeTemp = 0;
 
 // Função que irá chamar os XML, recebe o endereço, os dados e a função que irá executar ao final
 function postCallXML(endereco,dados,funcao) {
-    if (window.XMLHttpRequest)
-        xmlhttp = new XMLHttpRequest();
-    else
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	console.log("withCredentials" in xmlhttp);
-	xmlhttp.onreadystatechange=function() {
-		if(xmlhttp.readyState==4 && xmlhttp.status==200)
-			funcao(xmlhttp.responseXML);
+    var xhr = new XMLHttpRequest();
+	if ("withCredentials" in xhr) {
+		xhr.open("POST", endereco, true);
+	} else if (typeof XDomainRequest != "undefined") {
+		xhr = new XDomainRequest();
+		xhr.open("POST", endereco);
 	}
-    xmlhttp.open("POST", endereco, true);
-	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xmlhttp.send(dados);
+	xhr.onreadystatechange=function() {
+		if(xhr.readyState==4 && xhr.status==200)
+			funcao(xhr.responseXML);
+	}
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr.send(dados);
 }
 
 // Funcao que irá exibir a lista de sugestões de pesquisa
