@@ -42,11 +42,13 @@ function mostraSugestao() {
 }
 
 var inputPesqusia = document.getElementById('busca-html5');
-if(typeof inputPesqusia != "undefined") 
+if(typeof inputPesqusia != "undefined") {
 	inputPesqusia.onkeyup = function() {
 		clearInterval(timeHolder);
 		timeHolder = setInterval('mostraSugestao()',2000);
 	}
+	inputPesqusia.setAttribute('x-webkit-speech');
+}
 function clicaSugestao(dom) {
 	inputPesqusia.value = dom.innerHTML;
 	var x = document.getElementById('sugestoes');
