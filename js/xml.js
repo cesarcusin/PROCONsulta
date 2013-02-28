@@ -1,33 +1,53 @@
-function chamar() {
-    if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp = new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.open("GET", "cd_catalog.xml", false);
-    xmlhttp.send();
-    xmlDoc = xmlhttp.responseXML;
+// Variáveis de tempo
+var timeHolder, timeTemp = 0;
 
-    document.write('<table class="tabela" border="1">');
-    var x = xmlDoc.getElementsByTagName("CD");
-    for (i = 0; i < x.length; i++)
-    {
-        document.write('<tr><td class="td">');
-        document.write(x[i].getElementsByTagName('TITLE')[0].childNodes[0].nodeValue);
-        document.write('</td><td class="td">');
-        document.write(x[i].getElementsByTagName('ARTIST')[0].childNodes[0].nodeValue);
-        document.write('</td><td class="td">');
-        document.write(x[i].getElementsByTagName('COUNTRY')[0].childNodes[0].nodeValue);
-        document.write('</td><td class="td">');
-        document.write(x[i].getElementsByTagName('COMPANY')[0].childNodes[0].nodeValue);
-        document.write('</td><td class="td">');
-        document.write(x[i].getElementsByTagName('PRICE')[0].childNodes[0].nodeValue);
-        document.write('</td><td class="td">');
-        document.write(x[i].getElementsByTagName('YEAR')[0].childNodes[0].nodeValue);
-        document.write('</td></tr>');
-    }
-    document.write('</table>');
+// Função que irá chamar os XML, recebe o endereço, os dados e a função que irá executar ao final
+function postCallXML(endereco,dados,funcao) {
+    if (window.XMLHttpRequest)
+        xmlhttp = new XMLHttpRequest();
+    else
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	xmlhttp.onreadystatechange=function() {
+		if(xmlhttp.readyState==4 && xmlhttp.status==200)
+			funcao(xmlhttp.responseXML);
+	}
+    xmlhttp.open("POST", endereco, true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp.send(dados);
+}
+
+// Funcao que irá exibir a lista de sugestões de pesquisa
+function mostraSugestao() {
+	var termoPesquisa = encodeURIComponent(document.getElementById('busca-html5').value);
+	clearInterval(timeHolder);
+	if(timeTemp>0) {		
+		var x = document.getElementById('sugestoes');
+		x.parentNode.removeChild(x);
+	}
+	postCallXML('http://projetos.arturluiz.com/proconsulta/sugestao.php','termo='+termoPesquisa,function (xmlDoc) {
+		var container = document.createElement('div');
+		container.id = 'sugestoes';
+		var content = ""; 
+		var x = xmlDoc.getElementsByTagName("texto");
+		var y = xmlDoc.getElementsByTagName("termo");
+		console.log("Pesquisa pelo termo: "+y[0].childNodes[0].nodeValue+"\n");
+		for (i = 0; i < x.length; i++)
+			content += '<span onclick="clicaSugestao(this)">'+x[i].childNodes[0].nodeValue+'</span><br/>';
+		container.innerHTML = content; 
+        document.getElementById('form-busca').appendChild(container);
+		timeTemp++;
+	});
+}
+
+var inputPesqusia = document.getElementById('busca-html5');
+if(typeof inputPesqusia != "undefined") 
+	inputPesqusia.onkeyup = function() {
+		clearInterval(timeHolder);
+		timeHolder = setInterval('mostraSugestao()',2000);
+	}
+function clicaSugestao(dom) {
+	inputPesqusia.value = dom.innerHTML;
+	var x = document.getElementById('sugestoes');
+	x.parentNode.removeChild(x);
+	document.getElementById('form-busca').onsubmit();
 }
