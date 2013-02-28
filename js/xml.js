@@ -32,7 +32,7 @@ function mostraSugestao() {
 		var content = ""; 
 		var x = xmlDoc.getElementsByTagName("texto");
 		var y = xmlDoc.getElementsByTagName("termo");
-		console.log("Pesquisa pelo termo: "+y[0].childNodes[0].nodeValue+"\n");
+		console.log("Sugestões para o termo: "+y[0].childNodes[0].nodeValue);
 		for (i = 0; i < x.length; i++)
 			content += '<span onclick="clicaSugestao(this)">'+x[i].childNodes[0].nodeValue+'</span><br/>';
 		container.innerHTML = content; 
@@ -45,13 +45,13 @@ function pesquisar(termo,pagina) {
 	var termoPesquisa = encodeURIComponent(termo);
 	postCallXML('http://projetos.arturluiz.com/proconsulta/resultado.php','termo='+termoPesquisa+'&pagina='+pagina,function (xmlDoc) {
 		var container = document.createElement('div');
-		container.id = 'sugestoes';
+		container.id = 'resultado';
 		var content = ""; 
 		var x = xmlDoc.getElementsByTagName("texto");
 		var y = xmlDoc.getElementsByTagName("termo");
-		console.log("Pesquisa pelo termo: "+y[0].childNodes[0].nodeValue+"\n");
+		console.log("Pesquisa pelo termo: "+y[0].childNodes[0].nodeValue);
 		for (i = 0; i < x.length; i++)
-			content += '<span onclick="clicaSugestao(this)">'+x[i].childNodes[0].nodeValue+'</span><br/>';
+			content += '<a onclick="clicaResultado(this)">'+x[i].childNodes[0].nodeValue+'</a><br/>';
 		container.innerHTML = content; 
         document.getElementById('form-busca').appendChild(container);
 		timeTemp++;
