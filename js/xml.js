@@ -34,7 +34,7 @@ function mostraSugestao() {
 		var y = xmlDoc.getElementsByTagName("termo");
 		console.log("Sugestões para o termo: "+y[0].childNodes[0].nodeValue);
 		for (i = 0; i < x.length; i++)
-			content += '<span onclick="clicaSugestao(this)">'+x[i].childNodes[0].nodeValue+'</span><br/>';
+			content += '<span class=\"sugestao\" onclick="clicaSugestao(this)">'+x[i].childNodes[0].nodeValue+'</span><br/>';
 		container.innerHTML = content; 
         document.getElementById('form-busca').appendChild(container);
 		timeTemp++;
@@ -48,13 +48,13 @@ function pesquisar(termo,pagina) {
 		container.id = 'resultado';
 		var content = "<h4>Resultados</h4>"; 
 		if(pagina>1) {
-			content += "<a class=\"esquerda\" href=\"#\" title=\"Voltar página\">Voltar</a>";
+			content += "<a href=\"#\" title=\"Voltar página\">Voltar</a>";
 		}
 		var x = xmlDoc.getElementsByTagName("texto");
 		var y = xmlDoc.getElementsByTagName("termo");
 		console.log("Pesquisa pelo termo: "+y[0].childNodes[0].nodeValue);
 		for (i = 0; i < x.length; i++)
-			content += '<a onclick="clicaResultado(this)">'+x[i].childNodes[0].nodeValue+'</a><br/>';
+			content += '<a class=\"pesquisa\" onclick="clicaResultado(this)">'+x[i].childNodes[0].nodeValue+'</a><br/>';
 		container.innerHTML = content; 
         document.getElementById('form-busca').appendChild(container);
 		timeTemp++;

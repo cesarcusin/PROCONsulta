@@ -81,8 +81,12 @@ a {
     top: 170px;
 }
 
-.esquerda {
+.pesquisa {
     color: red;
+    text-align: left;
+}
+
+.sugestao {
     text-align: left;
 }
 
