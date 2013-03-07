@@ -48,7 +48,7 @@ function pesquisar(termo,pagina) {
 		container.id = 'resultado';
 		var content = "<h4>Resultados</h4>"; 
 		if(pagina>1) {
-			content += "<a href=\"#\" title=\"Voltar página\">Voltar</a>";
+			content += "<a class=\"esquerda\" href=\"#\" title=\"Voltar página\">Voltar</a>";
 		}
 		var x = xmlDoc.getElementsByTagName("texto");
 		var y = xmlDoc.getElementsByTagName("termo");

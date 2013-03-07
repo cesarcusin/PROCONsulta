@@ -36,13 +36,16 @@ nav {
 }
 
 nav a, ul{
-    /*ddisplay: inline-block;*/
     vertical-align: middle;
 }
 
 nav li{
     display: inline-block;
     padding: 6px;
+}
+
+aside {
+    text-align: center;
 }
 
 footer{
@@ -72,6 +75,16 @@ a {
     max-width: 85%;
 }
 
+#qrcode {
+        position: absolute;
+        margin-left: 80%;
+        top: 170px;
+    }
+
+    .esquerda {
+        text-align: left;
+    }
+    
 .tabela {
     border: 0.1em solid #7a7a7a;
     border-radius: 4px;
@@ -82,4 +95,11 @@ a {
 .td{
     border: 0.1em solid #7a7a7a;
     border-radius: 4px;
+}
+
+@media screen and (max-width: 460px) {
+    
+    #qrcode {
+        display: none;
+    }
 }
