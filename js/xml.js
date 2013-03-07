@@ -29,7 +29,7 @@ function mostraSugestao() {
 	postCallXML('http://projetos.arturluiz.com/proconsulta/sugestao.php','termo='+termoPesquisa,function (xmlDoc) {
 		var container = document.createElement('div');
 		container.id = 'sugestoes';
-		var content = ""; 
+		var content = "<br><h4>Sugestões:</h4>"; 
 		var x = xmlDoc.getElementsByTagName("texto");
 		var y = xmlDoc.getElementsByTagName("termo");
 		console.log("Sugestões para o termo: "+y[0].childNodes[0].nodeValue);
@@ -46,7 +46,7 @@ function pesquisar(termo,pagina) {
 	postCallXML('http://projetos.arturluiz.com/proconsulta/resultado.php','termo='+termoPesquisa+'&pagina='+pagina,function (xmlDoc) {
 		var container = document.createElement('div');
 		container.id = 'resultado';
-		var content = "<h4>Resultados</h4>"; 
+		var content = "<br><h4>Resultados</h4>"; 
 		if(pagina>1) {
 			content += "<a href=\"#\" title=\"Voltar página\">Voltar</a>";
 		}
