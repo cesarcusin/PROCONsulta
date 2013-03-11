@@ -92,6 +92,7 @@ function pesquisar(termo, pagina) {
 		container.innerHTML = content; 
         	document.getElementById($idFormBusca).appendChild(container);
 	});
+	return false;
 }
 
 // Funções das sugestões
@@ -127,7 +128,6 @@ if(typeof formBusca != "undefined") {
 	formBusca.onsubmit = function() {
 		var termo = document.getElementById($idInputBusca).value;
 		var pagina = 1;
-		pesquisar(termo, pagina);
-		return false;
+		return pesquisar(termo, pagina);
 	}
 }
