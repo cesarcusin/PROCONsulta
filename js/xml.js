@@ -1,9 +1,15 @@
-// Variáveis de tempo
-var timeHolder, timeTemp = 0;
+// Variáveis Temporárias
+var	timeHolder,
+	timeTemp	= 0;
+
+// Variáveis de Configuração
+var	$idInputBusca	= "busca-html5",
+	$idSugestoes	= "sugestoes",
+	$idSugestao	= "sugestao";
 
 // Função que irá chamar os XML, recebe o endereço, os dados e a função que irá executar ao final
 function postCallXML(endereco,dados,funcao) {
-    var xhr = new XMLHttpRequest();
+	var xhr = new XMLHttpRequest();
 	if ("withCredentials" in xhr) {
 		xhr.open("POST", endereco, true);
 	} else if (typeof XDomainRequest != "undefined") {
@@ -20,15 +26,28 @@ function postCallXML(endereco,dados,funcao) {
 
 // Funcao que irá exibir a lista de sugestões de pesquisa
 function mostraSugestao() {
-	var termoPesquisa = encodeURIComponent(document.getElementById('busca-html5').value);
+	// Cancela o timing de carregar as sugestões
 	clearInterval(timeHolder);
-	if(timeTemp>0) {		
-		var x = document.getElementById('sugestoes');
-		x.parentNode.removeChild(x);
+	
+	// Verifica se já existe sugestões e limpa caso verdadeiro
+	var sugestaoDOM = document.getElementById($idSugestao);
+	if(typeof sugestaoDOM != "undefined") {
+		sugestaoDOM.parentNode.removeChild(sugestaoDOM);
 	}
+	
+	// Pega o termo da busca
+	var inputBuscaDOM = document.getElementById($idInputBusca);
+	if(typeof inputBuscaDOM != "undefined") {
+		var termoPesquisa = encodeURIComponent(inputBuscaDOM.value);
+	} else {
+		console.log("Não foi possível encontrar o campo de busca.");
+	}
+	
+	// Puxa o XML com as sugestões
+	console.log("Buscando sugestões para o termo: " + termoPesquisa);
 	postCallXML('http://projetos.arturluiz.com/proconsulta/sugestao.php','termo='+termoPesquisa,function (xmlDoc) {
 		var container = document.createElement('div');
-		container.id = 'sugestoes';
+		container.id = $idSugestao;
 		var content = "<br><h4>Sugestões:</h4>"; 
 		var x = xmlDoc.getElementsByTagName("texto");
 		var y = xmlDoc.getElementsByTagName("termo");
@@ -36,8 +55,7 @@ function mostraSugestao() {
 		for (i = 0; i < x.length; i++)
 			content += '<span class=\"sugestao\" onclick="clicaSugestao(this)">'+x[i].childNodes[0].nodeValue+'</span><br/>';
 		container.innerHTML = content; 
-        document.getElementById('form-busca').appendChild(container);
-		timeTemp++;
+        	document.getElementById('form-busca').appendChild(container);
 	});
 }
 
