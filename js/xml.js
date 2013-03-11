@@ -5,7 +5,7 @@ var	timeHolder,
 // Variáveis de Configuração
 var	$idInputBusca	= "busca-html5",
 	$idSugestoes	= "sugestoes",
-	$idSugestao	= "sugestao";
+	$classSugestao	= "sugestao";
 
 // Função que irá chamar os XML, recebe o endereço, os dados e a função que irá executar ao final
 function postCallXML(endereco,dados,funcao) {
@@ -52,8 +52,10 @@ function mostraSugestao() {
 		var x = xmlDoc.getElementsByTagName("texto");
 		var y = xmlDoc.getElementsByTagName("termo");
 		console.log("Sugestões para o termo: "+y[0].childNodes[0].nodeValue);
-		for (i = 0; i < x.length; i++)
-			content += '<span class=\"sugestao\" onclick="clicaSugestao(this)">'+x[i].childNodes[0].nodeValue+'</span><br/>';
+		for (i = 0; i < x.length; i++) {
+			var sugestao = x[i].childNodes[0].nodeValue;
+			content += '<span class="$classSugestao" onclick="clicaSugestao(this)">sugestao</span><br/>';
+		}
 		container.innerHTML = content; 
         	document.getElementById('form-busca').appendChild(container);
 	});
