@@ -31,13 +31,13 @@ function mostraSugestao() {
 	
 	// Verifica se já existe sugestões e limpa caso verdadeiro
 	var sugestaoDOM = document.getElementById($idSugestao);
-	if(typeof sugestaoDOM != "undefined" and sugestaoDOM != null) {
+	if(typeof sugestaoDOM != "undefined" && sugestaoDOM != null) {
 		sugestaoDOM.parentNode.removeChild(sugestaoDOM);
 	}
 	
 	// Pega o termo da busca
 	var inputBuscaDOM = document.getElementById($idInputBusca);
-	if(typeof inputBuscaDOM != "undefined" and inputBuscaDOM != null) {
+	if(typeof inputBuscaDOM != "undefined" && inputBuscaDOM != null) {
 		var termoPesquisa = encodeURIComponent(inputBuscaDOM.value);
 	} else {
 		console.log("Não foi possível encontrar o campo de busca.");
