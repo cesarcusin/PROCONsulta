@@ -94,12 +94,16 @@ function pesquisar(termo, pagina) {
 	});
 }
 
+// Funções das sugestões
 var inputPesquisa = document.getElementById($idInputBusca);
 if(typeof inputPesquisa != "undefined") {
+	// Adiciona o escutador de evento ao clicar nas sugestões
 	inputPesquisa.onkeyup = function() {
 		clearInterval(timeHolder);
 		timeHolder = setInterval(mostraSugestao, $timeSugestao);
 	}
+	
+	// Adiciona suporte à fala nos navegadores webkit
 	inputPesquisa.setAttribute('x-webkit-speech');
 }
 function clicaSugestao(dom) {
@@ -116,12 +120,14 @@ function clicaSugestao(dom) {
 	document.getElementById($idFormBusca).onsubmit();
 }
 
+// Funções da busca
 var formBusca = document.getElementById($idFormBusca);
 if(typeof formBusca != "undefined") {
+	// Adiciona evento ao enviar do formulário
 	formBusca.onsubmit = function() {
 		var termo = document.getElementById($idInputBusca).value;
 		var pagina = 1;
-		pesquisar(termo,pagina);
+		pesquisar(termo, pagina);
 		return false;
 	}
 }
