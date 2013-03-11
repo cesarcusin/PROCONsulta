@@ -54,7 +54,7 @@ function mostraSugestao() {
 		console.log("Sugestões para o termo: "+y[0].childNodes[0].nodeValue);
 		for (i = 0; i < x.length; i++) {
 			var sugestao = x[i].childNodes[0].nodeValue;
-			content += '<span class="$classSugestao" onclick="clicaSugestao(this)">sugestao</span><br/>';
+			content += '<span class="'+$classSugestao+'" onclick="clicaSugestao(this)">'+sugestao+'</span><br/>';
 		}
 		container.innerHTML = content; 
         	document.getElementById('form-busca').appendChild(container);
