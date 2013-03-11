@@ -105,7 +105,7 @@ if(typeof inputPesquisa != "undefined") {
 	}
 	
 	// Adiciona suporte à fala nos navegadores webkit
-	inputPesquisa.setAttribute('x-webkit-speech');
+	inputPesquisa.setAttribute('x-webkit-speech','x-webkit-speech');
 }
 function clicaSugestao(dom) {
 	// Coloca o valor do input-busca com o valor da sugestão
