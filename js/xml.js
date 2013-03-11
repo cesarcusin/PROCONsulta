@@ -1,6 +1,5 @@
 // Variáveis Temporárias
-var	timeHolder,
-	timeTemp	= 0;
+var	timeHolder;
 
 // Variáveis de Configuração
 var	$idFormBusca	= "form-busca";
@@ -95,19 +94,26 @@ function pesquisar(termo,pagina) {
 	});
 }
 
-var inputPesqusia = document.getElementById('busca-html5');
+var inputPesqusia = document.getElementById($idInputBusca);
 if(typeof inputPesqusia != "undefined") {
 	inputPesqusia.onkeyup = function() {
 		clearInterval(timeHolder);
-		timeHolder = setInterval('mostraSugestao()',$timeSugestao);
+		timeHolder = setInterval(mostraSugestao,$timeSugestao);
 	}
 	inputPesqusia.setAttribute('x-webkit-speech');
 }
 function clicaSugestao(dom) {
+	// Coloca o valor do input-busca com o valor da sugestão
 	inputPesqusia.value = dom.innerHTML;
-	var x = document.getElementById('sugestoes');
-	x.parentNode.removeChild(x);
-	document.getElementById('form-busca').onsubmit();
+	
+	// Remove quadro de sugestões
+	var sugestaoDOM = document.getElementById($idSugestoes);
+	if(typeof sugestaoDOM != "undefined" && sugestaoDOM != null) {
+		sugestaoDOM.parentNode.removeChild(sugestaoDOM);
+	}
+	
+	// Executa a busca
+	document.getElementById($idFormBusca).onsubmit();
 }
 
 var formBusca = document.getElementById('form-busca');
