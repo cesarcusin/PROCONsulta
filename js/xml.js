@@ -11,7 +11,7 @@ var	$idFormBusca	= "form-busca";
 	$classResultado	= "resultados";
 
 // Função que irá chamar os XML, recebe o endereço, os dados e a função que irá executar ao final
-function postCallXML(endereco,dados,funcao) {
+function postCallXML(endereco, dados, funcao) {
 	var xhr = new XMLHttpRequest();
 	if ("withCredentials" in xhr) {
 		xhr.open("POST", endereco, true);
@@ -19,8 +19,8 @@ function postCallXML(endereco,dados,funcao) {
 		xhr = new XDomainRequest();
 		xhr.open("POST", endereco);
 	}
-	xhr.onreadystatechange=function() {
-		if(xhr.readyState==4 && xhr.status==200)
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && xhr.status == 200)
 			funcao(xhr.responseXML);
 	}
 	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
@@ -65,7 +65,7 @@ function mostraSugestao() {
 }
 
 // Função que irá exibir as respostas da busca
-function pesquisar(termo,pagina) {
+function pesquisar(termo, pagina) {
 	// Verifica se já existe resultados e limpa caso verdadeiro
 	var resultadoDOM = document.getElementById($idResultados);
 	if(typeof resultadoDOM != "undefined" && resultadoDOM != null) {
@@ -76,8 +76,8 @@ function pesquisar(termo,pagina) {
 	var termoPesquisa = encodeURIComponent(termo);
 	
 	// Puxa o XML dos resultados
-	console.log('Pesquisa pelo termo: '+termo);
-	postCallXML('http://projetos.arturluiz.com/proconsulta/resultado.php','termo='+termoPesquisa+'&pagina='+pagina,function (xmlDoc) {
+	console.log('Pesquisa pelo termo: ' + termo);
+	postCallXML('http://projetos.arturluiz.com/proconsulta/resultado.php','termo=' + termoPesquisa + '&pagina=' + pagina,function (xmlDoc) {
 		var container = document.createElement('div');
 		container.id = $idResultados;
 		var content = "<br><h4>Resultados</h4>"; 
@@ -86,25 +86,25 @@ function pesquisar(termo,pagina) {
 		}
 		var x = xmlDoc.getElementsByTagName("texto");
 		var y = xmlDoc.getElementsByTagName("termo");
-		console.log("Resultados do termo: "+y[0].childNodes[0].nodeValue);
+		console.log("Resultados do termo: " + y[0].childNodes[0].nodeValue);
 		for (i = 0; i < x.length; i++)
-			content += '<a class="'+$classResultado+'" onclick="clicaResultado(this)">'+x[i].childNodes[0].nodeValue+'</a><br/>';
+			content += '<a class="' + $classResultado + '" onclick="clicaResultado(this)">' + x[i].childNodes[0].nodeValue + '</a><br/>';
 		container.innerHTML = content; 
         	document.getElementById($idFormBusca).appendChild(container);
 	});
 }
 
-var inputPesqusia = document.getElementById($idInputBusca);
-if(typeof inputPesqusia != "undefined") {
-	inputPesqusia.onkeyup = function() {
+var inputPesquisa = document.getElementById($idInputBusca);
+if(typeof inputPesquisa != "undefined") {
+	inputPesquisa.onkeyup = function() {
 		clearInterval(timeHolder);
-		timeHolder = setInterval(mostraSugestao,$timeSugestao);
+		timeHolder = setInterval(mostraSugestao, $timeSugestao);
 	}
-	inputPesqusia.setAttribute('x-webkit-speech');
+	inputPesquisa.setAttribute('x-webkit-speech');
 }
 function clicaSugestao(dom) {
 	// Coloca o valor do input-busca com o valor da sugestão
-	inputPesqusia.value = dom.innerHTML;
+	inputPesquisa.value = dom.innerHTML;
 	
 	// Remove quadro de sugestões
 	var sugestaoDOM = document.getElementById($idSugestoes);
@@ -116,10 +116,10 @@ function clicaSugestao(dom) {
 	document.getElementById($idFormBusca).onsubmit();
 }
 
-var formBusca = document.getElementById('form-busca');
+var formBusca = document.getElementById($idFormBusca);
 if(typeof formBusca != "undefined") {
 	formBusca.onsubmit = function() {
-		var termo = document.getElementById('busca-html5').value;
+		var termo = document.getElementById($idInputBusca).value;
 		var pagina = 1;
 		pesquisar(termo,pagina);
 		return false;
