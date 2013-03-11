@@ -4,6 +4,7 @@ var	timeHolder,
 
 // Variáveis de Configuração
 var	$idInputBusca	= "busca-html5",
+	$timeSugestao	= 1000,
 	$idSugestoes	= "sugestoes",
 	$classSugestao	= "sugestao";
 
@@ -85,7 +86,7 @@ var inputPesqusia = document.getElementById('busca-html5');
 if(typeof inputPesqusia != "undefined") {
 	inputPesqusia.onkeyup = function() {
 		clearInterval(timeHolder);
-		timeHolder = setInterval('mostraSugestao()',2000);
+		timeHolder = setInterval('mostraSugestao()',$timeSugestao);
 	}
 	inputPesqusia.setAttribute('x-webkit-speech');
 }
