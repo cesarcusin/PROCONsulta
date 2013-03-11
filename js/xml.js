@@ -125,9 +125,9 @@ function clicaSugestao(dom) {
 var formBusca = document.getElementById($idFormBusca);
 if(typeof formBusca != "undefined") {
 	// Adiciona evento ao enviar do formulário
-	formBusca.onsubmit = function() {
-		var termo = document.getElementById($idInputBusca).value;
-		var pagina = 1;
-		return pesquisar(termo, pagina);
-	}
+	formBusca.onsubmit = "return false; (function() {"+
+		"var termo = document.getElementById($idInputBusca).value;"+
+		"var pagina = 1;"+
+		"return pesquisar(termo, pagina);"+
+	"})()";
 }
