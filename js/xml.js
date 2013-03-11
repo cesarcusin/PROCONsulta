@@ -128,6 +128,7 @@ if(typeof formBusca != "undefined") {
 	formBusca.addEventListener('submit',function() {
 		var termo = document.getElementById($idInputBusca).value;
 		var pagina = 1;
-		return pesquisar(termo, pagina);
+		pesquisar(termo, pagina);
+		return false;
 	});
 }
