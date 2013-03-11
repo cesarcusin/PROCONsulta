@@ -125,10 +125,16 @@ function clicaSugestao(dom) {
 var formBusca = document.getElementById($idFormBusca);
 if(typeof formBusca != "undefined") {
 	// Adiciona evento ao enviar do formulário
-	formBusca.addEventListener('submit',function() {
+	formSubmit = function(e) {
 		var termo = document.getElementById($idInputBusca).value;
 		var pagina = 1;
 		pesquisar(termo, pagina);
+		e.preventDefault();
 		return false;
-	});
+	};
+	if (formBusca.addEventListener) {
+		formBusca.addEventListener('submit', formSubmit, false); 
+	} else if (el.attachEvent)  {
+		formBusca.attachEvent('onsubmit', formSubmit);
+	}
 }
