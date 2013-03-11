@@ -30,7 +30,7 @@ function mostraSugestao() {
 	clearInterval(timeHolder);
 	
 	// Verifica se já existe sugestões e limpa caso verdadeiro
-	var sugestaoDOM = document.getElementById($idSugestao);
+	var sugestaoDOM = document.getElementById($idSugestoes);
 	if(typeof sugestaoDOM != "undefined" && sugestaoDOM != null) {
 		sugestaoDOM.parentNode.removeChild(sugestaoDOM);
 	}
@@ -47,7 +47,7 @@ function mostraSugestao() {
 	console.log("Buscando sugestões para o termo: " + termoPesquisa);
 	postCallXML('http://projetos.arturluiz.com/proconsulta/sugestao.php','termo='+termoPesquisa,function (xmlDoc) {
 		var container = document.createElement('div');
-		container.id = $idSugestao;
+		container.id = $idSugestoes;
 		var content = "<br><h4>Sugestões:</h4>"; 
 		var x = xmlDoc.getElementsByTagName("texto");
 		var y = xmlDoc.getElementsByTagName("termo");
