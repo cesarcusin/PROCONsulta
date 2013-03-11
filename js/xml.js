@@ -3,10 +3,13 @@ var	timeHolder,
 	timeTemp	= 0;
 
 // Variáveis de Configuração
-var	$idInputBusca	= "busca-html5",
+var	$idFormBusca	= "form-busca";
+	$idInputBusca	= "busca-html5",
 	$timeSugestao	= 1000,
 	$idSugestoes	= "sugestoes",
-	$classSugestao	= "sugestao";
+	$classSugestao	= "sugestao",
+	$idResultados	= "resultado",
+	$classResultado	= "resultados";
 
 // Função que irá chamar os XML, recebe o endereço, os dados e a função que irá executar ao final
 function postCallXML(endereco,dados,funcao) {
@@ -62,23 +65,33 @@ function mostraSugestao() {
 	});
 }
 
+// Função que irá exibir as respostas da busca
 function pesquisar(termo,pagina) {
+	// Verifica se já existe resultados e limpa caso verdadeiro
+	var resultadoDOM = document.getElementById($idResultados);
+	if(typeof resultadoDOM != "undefined" && resultadoDOM != null) {
+		resultadoDOM.parentNode.removeChild(resultadoDOM);
+	}
+	
+	// Codifica termo de busca para o padrão URL
 	var termoPesquisa = encodeURIComponent(termo);
+	
+	// Puxa o XML dos resultados
+	console.log('Pesquisa pelo termo: '+termo);
 	postCallXML('http://projetos.arturluiz.com/proconsulta/resultado.php','termo='+termoPesquisa+'&pagina='+pagina,function (xmlDoc) {
 		var container = document.createElement('div');
-		container.id = 'resultado';
+		container.id = $idResultados;
 		var content = "<br><h4>Resultados</h4>"; 
 		if(pagina>1) {
-			content += "<a href=\"#\" title=\"Voltar página\">Voltar</a>";
+			content += '<a href="#" title="Voltar página">Voltar</a>';
 		}
 		var x = xmlDoc.getElementsByTagName("texto");
 		var y = xmlDoc.getElementsByTagName("termo");
-		console.log("Pesquisa pelo termo: "+y[0].childNodes[0].nodeValue);
+		console.log("Resultados do termo: "+y[0].childNodes[0].nodeValue);
 		for (i = 0; i < x.length; i++)
-			content += '<a class=\"pesquisa\" onclick="clicaResultado(this)">'+x[i].childNodes[0].nodeValue+'</a><br/>';
+			content += '<a class="'+$classResultado+'" onclick="clicaResultado(this)">'+x[i].childNodes[0].nodeValue+'</a><br/>';
 		container.innerHTML = content; 
-        document.getElementById('form-busca').appendChild(container);
-		timeTemp++;
+        	document.getElementById($idFormBusca).appendChild(container);
 	});
 }
 
