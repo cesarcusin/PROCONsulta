@@ -15,6 +15,7 @@ function postCallXML(endereco, dados, funcao) {
 	var xhr = new XMLHttpRequest();
 	if ("withCredentials" in xhr) {
 		xhr.open("POST", endereco, true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	} else if (typeof XDomainRequest != "undefined") {
 		xhr = new XDomainRequest();
 		xhr.open("POST", endereco);
@@ -23,7 +24,6 @@ function postCallXML(endereco, dados, funcao) {
 		if(xhr.readyState == 4 && xhr.status == 200)
 			funcao(xhr.responseXML);
 	}
-	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xhr.send(dados);
 }
 
